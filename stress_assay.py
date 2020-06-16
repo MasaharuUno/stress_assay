@@ -28,6 +28,7 @@ def stress_assay(n_times=10, duration=60, interval=60*60):
         camera.start_recording(f"{i:02d}.h264")    # start shooting
         sleep(duration)    # shoot for 'duration' time
         camera.stop_recording()    # stop shooting
+        camera.stop_preview()    # stop preview
         GPIO.output(ledGpio, GPIO.LOW)    # Led off
         sleep(interval_real)    # wait for interval time
 
