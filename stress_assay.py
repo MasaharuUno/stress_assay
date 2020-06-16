@@ -1,10 +1,12 @@
+# Import libraries
 import RPi.GPIO as GPIO
 import picamera
 from time import sleep
 
-ledGpio = 21
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(ledGpio, GPIO.OUT)
+# Setup 
+GPIO.setmode(GPIO.BCM)    # Set the GPIO pin name
+ledGpio = 21    # GPIO pin for use
+GPIO.setup(ledGpio, GPIO.OUT)    # Se the ledGpio in use
 
 camera = picamera.PiCamera()
 
@@ -18,16 +20,16 @@ def stress_assay(n_times=10, duration=60, interval=60*60):
     duration -- int: duration seconds of shooting
     interval -- int: interval seconds between shooting
     """
-    interval_real = interval - duration - 2
-    for i inrange(n_times):
-        GPIO.output(ledGpio, GPIO.HIGH)
-        camera.start_preview()
-        sleep(2)
-        camera.start_recording(f"{i:02d}.h264")
-        sleep(duration)
-        camera.stop_recording()
-        GPIO.output(ledGpio, GPIO.LOW)
-        sleep(interval_real)
+    interval_real = interval - duration - 2    # calculate real interval time
+    for i in range(n_times):    # iterate for n_times
+        GPIO.output(ledGpio, GPIO.HIGH)    # Led on
+        camera.start_preview()    # camera on for adjustment
+        sleep(2)    # camera adjustment time
+        camera.start_recording(f"{i:02d}.h264")    # start shooting
+        sleep(duration)    # shoot for 'duration' time
+        camera.stop_recording()    # stop shooting
+        GPIO.output(ledGpio, GPIO.LOW)    # Led off
+        sleep(interval_real)    # wait for interval time
 
 
 stress_assay(2, 20, 30)
