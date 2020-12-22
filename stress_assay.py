@@ -16,7 +16,7 @@ def stress_assay(n_times=10, duration=60, interval=60*60):
     Shoot 'duratioin' seconds movies for 'n_times' times every 'interval' seconds
     and save every movie.
 
-    Parameters:
+    # Arguments:
     n_times -- int: number of times to shoot
     duration -- int: duration seconds of shooting
     interval -- int: interval seconds between shooting
@@ -36,6 +36,6 @@ def stress_assay(n_times=10, duration=60, interval=60*60):
         sleep(interval_real)    # wait for interval time
 
 
-stress_assay(2, 20, 30)
+stress_assay(2, 60, 60*20)
 
 GPIO.cleanup()
